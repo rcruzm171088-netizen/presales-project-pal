@@ -33,7 +33,7 @@ const EMPTY: FormState = {
   customer: "",
   opportunity: "",
   name: "",
-  engineer: ENGINEERS[0],
+  engineer: ENGINEERS[0]!,
   status: "Planning",
   startDate: "",
   endDate: "",
