@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { FolderKanban, Activity, ListTodo, ArrowUpRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { DashboardHero } from "@/components/DashboardHero";
 import { fetchProjects, projectsQueryKey, type ProjectStatus } from "@/lib/projects";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -61,6 +62,8 @@ function DashboardPage() {
         </Button>
       }
     >
+      <DashboardHero />
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map(({ label, value, icon: Icon, hint }) => (
           <div key={label} className="surface-panel rounded-xl border border-border p-5">
