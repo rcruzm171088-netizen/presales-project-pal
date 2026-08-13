@@ -1,4 +1,4 @@
-import type { ProjectStatus } from "@/lib/projects-store";
+import type { ProjectStatus } from "@/lib/projects";
 
 const MAP: Record<ProjectStatus, string> = {
   Planning: "border-chart-2/40 bg-chart-2/10 text-chart-2",
