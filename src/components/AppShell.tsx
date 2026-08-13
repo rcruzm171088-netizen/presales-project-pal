@@ -1,7 +1,9 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { LayoutDashboard, FolderKanban, LogOut, Menu, X, Zap } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
-import { useStore } from "@/lib/projects-store";
+import { useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useSession } from "@/hooks/use-session";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
@@ -20,13 +22,17 @@ export function AppShell({
   actions?: ReactNode;
   children: ReactNode;
 }) {
-  const { user, signOut, ready } = useStore();
-  const router = useRouter();
+  const { user } = useSession();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (ready && !user) router.navigate({ to: "/" });
-  }, [ready, user, router]);
+  const signOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/", replace: true });
+  };
 
   const nav = (
     <nav className="flex flex-1 flex-col gap-1">
@@ -53,7 +59,7 @@ export function AppShell({
       <aside className="hidden w-64 shrink-0 flex-col gap-6 border-r border-sidebar-border bg-sidebar p-5 lg:flex">
         <Brand />
         {nav}
-        <UserBlock user={user} onSignOut={signOut} />
+        <UserBlock user={user?.email ?? null} onSignOut={signOut} />
       </aside>
 
       {open && (
@@ -67,7 +73,7 @@ export function AppShell({
               </Button>
             </div>
             {nav}
-            <UserBlock user={user} onSignOut={signOut} />
+            <UserBlock user={user?.email ?? null} onSignOut={signOut} />
           </aside>
         </div>
       )}
