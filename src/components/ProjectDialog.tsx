@@ -146,11 +146,14 @@ export function ProjectDialog({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {ENGINEERS.map((e) => (
-                  <SelectItem key={e} value={e}>
-                    {e}
-                  </SelectItem>
-                ))}
+                {users.map((user) => (
+  <SelectItem
+    key={user.id}
+    value={user.id}
+  >
+    {user.full_name}
+  </SelectItem>
+))}
               </SelectContent>
             </Select>
           </Field>
