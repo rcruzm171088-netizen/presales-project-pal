@@ -60,8 +60,8 @@ function NetworkCanvas() {
       }
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
+          const a = nodes[i]!;
+          const b = nodes[j]!;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const d = Math.hypot(dx, dy);
@@ -114,8 +114,8 @@ export function DashboardHero() {
 
   const meta = (user?.user_metadata ?? {}) as Record<string, unknown>;
   const fullName =
-    (typeof meta.full_name === "string" && meta.full_name) ||
-    (typeof meta.name === "string" && meta.name) ||
+    (typeof meta["full_name"] === "string" && (meta["full_name"] as string)) ||
+    (typeof meta["name"] === "string" && (meta["name"] as string)) ||
     user?.email?.split("@")[0] ||
     "invitado";
 
