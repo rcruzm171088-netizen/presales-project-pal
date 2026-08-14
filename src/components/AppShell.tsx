@@ -37,7 +37,7 @@ const NAV = [
     label: "Administración",
     icon: ShieldCheck,
   },
-];
+] as const;
 
 export function AppShell({
   title,
@@ -151,3 +151,10 @@ function UserBlock({ user, onSignOut }: { user: string | null; onSignOut: () => 
     </div>
   );
 }
+
+import {
+  Building2,
+  FolderOpen,
+  ListTodo,
+  ShieldCheck,
+} from "lucide-react";
