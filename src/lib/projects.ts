@@ -61,3 +61,20 @@ export async function deleteProject(id: string) {
   const { error } = await supabase.from("projects").delete().eq("id", id);
   if (error) throw error;
 }
+/****/
+export async function fetchPresalesUsers() {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select(`
+      id,
+      full_name,
+      email,
+      is_active
+    `)
+    .eq("is_active", true)
+    .order("full_name");
+
+  if (error) throw error;
+
+  return data ?? [];
+}
