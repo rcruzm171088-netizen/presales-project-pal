@@ -14,14 +14,19 @@ export type ProjectInput = {
   pending_tasks: number;
 };
 
-export type ProjectStatus = "Planning" | "In Progress" | "On Hold" | "Completed" | "Cancelled";
+export type ProjectStatus =
+  | "En Proceso"
+  | "Ganado"
+  | "Perdido"
+  | "Cancelado"
+  | "Standby";
 
-export const STATUSES: ProjectStatus[] = [
-  "Planning",
-  "In Progress",
-  "On Hold",
-  "Completed",
-  "Cancelled",
+export const STATUSES = [
+  "En Proceso",
+  "Ganado",
+  "Perdido",
+  "Cancelado",
+  "Standby",
 ];
 
 export const ENGINEERS = [
