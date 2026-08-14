@@ -7,9 +7,37 @@ import { useSession } from "@/hooks/use-session";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/projects", label: "Projects", icon: FolderKanban },
-] as const;
+  {
+    to: "/dashboard",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    to: "/projects",
+    label: "Proyectos",
+    icon: FolderKanban,
+  },
+  {
+    to: "/clients",
+    label: "Clientes",
+    icon: Building2,
+  },
+  {
+    to: "/tasks",
+    label: "Tareas",
+    icon: ListTodo,
+  },
+  {
+    to: "/documents",
+    label: "Documentos",
+    icon: FolderOpen,
+  },
+  {
+    to: "/admin",
+    label: "Administración",
+    icon: ShieldCheck,
+  },
+];
 
 export function AppShell({
   title,
