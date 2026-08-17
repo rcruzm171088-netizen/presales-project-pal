@@ -40,8 +40,14 @@ export async function createTask(input: TaskInput, assignees: string[]) {
 }
 
 export async function updateTask(id: string, input: Partial<TaskInput>, assignees?: string[]) {
-  const patch: Record<string, unknown> = { ...input };
-  if (input.status === "Completada") patch['completed_at'] = new Date().toISOString();
+  const patch = {
+    ...input,
+    ...(input.status === "Completada"
+      ? { completed_at: new Date().toISOString() }
+      : input.status
+        ? { completed_at: null }
+        : {}),
+  };
   const { error } = await supabase.from("tasks").update(patch).eq("id", id);
   if (error) throw error;
   if (assignees) {
