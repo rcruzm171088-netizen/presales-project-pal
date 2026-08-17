@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       clients: {
         Row: {
+          client_code: string
           contact_email: string
           contact_name: string
           contact_phone: string
@@ -29,6 +30,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          client_code?: string
           contact_email?: string
           contact_name?: string
           contact_phone?: string
@@ -42,6 +44,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          client_code?: string
           contact_email?: string
           contact_name?: string
           contact_phone?: string
@@ -86,30 +89,39 @@ export type Database = {
       project_documents: {
         Row: {
           created_at: string
+          doc_type: string
           file_name: string
           file_type: string
           id: string
           project_id: string
           storage_path: string
           uploaded_by: string
+          url: string
+          version: string
         }
         Insert: {
           created_at?: string
+          doc_type?: string
           file_name: string
           file_type?: string
           id?: string
           project_id: string
-          storage_path: string
+          storage_path?: string
           uploaded_by?: string
+          url?: string
+          version?: string
         }
         Update: {
           created_at?: string
+          doc_type?: string
           file_name?: string
           file_type?: string
           id?: string
           project_id?: string
           storage_path?: string
           uploaded_by?: string
+          url?: string
+          version?: string
         }
         Relationships: [
           {
@@ -206,6 +218,7 @@ export type Database = {
           presales_engineer: string
           presales_engineer_id: string | null
           presales_lead_id: string | null
+          priority: string
           project_id: string
           project_name: string
           sales_rep: string
@@ -231,6 +244,7 @@ export type Database = {
           presales_engineer?: string
           presales_engineer_id?: string | null
           presales_lead_id?: string | null
+          priority?: string
           project_id?: string
           project_name?: string
           sales_rep?: string
@@ -256,6 +270,7 @@ export type Database = {
           presales_engineer?: string
           presales_engineer_id?: string | null
           presales_lead_id?: string | null
+          priority?: string
           project_id?: string
           project_name?: string
           sales_rep?: string
@@ -284,6 +299,120 @@ export type Database = {
             columns: ["presales_lead_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quotes: {
+        Row: {
+          amount: number
+          author_id: string | null
+          created_at: string
+          currency: string
+          folio: string
+          id: string
+          issue_date: string
+          kind: string
+          project_id: string
+          status: string
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          amount?: number
+          author_id?: string | null
+          created_at?: string
+          currency?: string
+          folio?: string
+          id?: string
+          issue_date?: string
+          kind?: string
+          project_id: string
+          status?: string
+          updated_at?: string
+          version?: string
+        }
+        Update: {
+          amount?: number
+          author_id?: string | null
+          created_at?: string
+          currency?: string
+          folio?: string
+          id?: string
+          issue_date?: string
+          kind?: string
+          project_id?: string
+          status?: string
+          updated_at?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quotes_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quotes_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sows: {
+        Row: {
+          author_id: string | null
+          created_at: string
+          id: string
+          issue_date: string
+          project_id: string
+          status: string
+          title: string
+          updated_at: string
+          url: string
+          version: string
+        }
+        Insert: {
+          author_id?: string | null
+          created_at?: string
+          id?: string
+          issue_date?: string
+          project_id: string
+          status?: string
+          title?: string
+          updated_at?: string
+          url?: string
+          version?: string
+        }
+        Update: {
+          author_id?: string | null
+          created_at?: string
+          id?: string
+          issue_date?: string
+          project_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          url?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sows_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sows_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
             referencedColumns: ["id"]
           },
         ]
